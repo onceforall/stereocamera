@@ -1,0 +1,3 @@
+/home/yons/projects/stereocamera/CMakeFiles/rebuild_cache.dir
+/home/yons/projects/stereocamera/CMakeFiles/stereo_camera.dir
+/home/yons/projects/stereocamera/CMakeFiles/edit_cache.dir

@@ -1,0 +1,2 @@
+void calibrate(string filename,string outfilename,cv::Mat &cameraMatrix,cv::Mat &distCoeffs,std::vector<std::vector<cv::Point2f>> &imagePointsSeq,std::vector<std::vector<cv::Point3f>> &objectPoints,int cnt);
+int stereo_calibrate();
