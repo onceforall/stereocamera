@@ -69,7 +69,6 @@ void adjustimg(cv::Mat* frameL,cv::Mat* frameR,cv::Mat* frameadjust,cv::Mat* fra
                 cv::imwrite("/home/yons/projects/stereocamera/res/ratio0_frameL.png",*frameL);
                 cv::imwrite("/home/yons/projects/stereocamera/res/ratio1_frameR.png",*frameR);    
                 //cv::waitKey(30);   
-                continue;     
             }
         }
     }

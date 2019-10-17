@@ -5,7 +5,7 @@
 #include <opencv2/stitching.hpp>
 #include <string>
 #include <opencv2/core/core.hpp>
-
+#include <time.h>
 
 extern bool ischanged;
 int i=0,j=0;
@@ -30,10 +30,12 @@ void image_stitch(cv::Mat* frameadjust,cv::Mat* framestitch,cv::Mat* frameLr,cv:
         //cv::Mat frameadjust=cv::imread("/home/yons/projects/stereocamera/res/resR.png");
         //cv::Mat origR      =cv::imread("/home/yons/projects/stereocamera/res/ratio1_frameR.png");
         imgs.clear();
-       
+
         //if(!frameLr->empty())     imgs.push_back(*frameLr);
         if(ischanged)
         {
+		    int64 t=getTickCount();
+		    double matching_time = (double)getTickCount();
             ischanged=false;
             minMaxIdx(*frameadjust,minp,maxp);
             if(maxv==0) continue;
@@ -54,9 +56,11 @@ void image_stitch(cv::Mat* frameadjust,cv::Mat* framestitch,cv::Mat* frameLr,cv:
             
             else
             {
-                cout<<"stitching depth"<<endl;
+                matching_time = ((double)getTickCount() - matching_time)/getTickFrequency();
+                cout<<"stitching depth used time: "<<matching_time<<endl;
                 cv::resize(pano,pano,framesize,0,0,1);
                 imwrite(result_depth+to_string(j++)+".png", pano);
+                
                 cv::imshow("result",pano);
                 waitKey(30);
             }
@@ -64,7 +68,6 @@ void image_stitch(cv::Mat* frameadjust,cv::Mat* framestitch,cv::Mat* frameLr,cv:
         }
         else
         {
-            
             imgs.clear();
             minMaxIdx(*frameLr,minp,maxp);
             if(maxv==0) continue;
@@ -72,12 +75,15 @@ void image_stitch(cv::Mat* frameadjust,cv::Mat* framestitch,cv::Mat* frameLr,cv:
             if(maxv==0) continue;
             if(!frameLr->empty())     imgs.push_back(*frameLr);
             if(!frameRr->empty())     imgs.push_back(*frameRr);
+            int64 t=getTickCount();
+		    double matching_time = (double)getTickCount();
             Stitcher::Status status = stitcher.stitch(imgs, pano);
             if(status!=Stitcher::OK)
                 continue;
             else
             { 
-                cout<<"stitching original"<<endl;
+                matching_time = ((double)getTickCount() - matching_time)/getTickFrequency();
+                cout<<"stitching original used time: "<<matching_time<<endl;
                 cv::resize(pano,pano,framesize,0,0,1);
                 imwrite(result_regular+to_string(i++)+".png", pano);
                 cv::imshow("result",pano);
