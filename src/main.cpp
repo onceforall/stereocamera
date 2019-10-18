@@ -89,14 +89,14 @@ int main()
     rate = cap1.get(CV_CAP_PROP_FPS);
     cout<<cap1.get(3)<<' '<<cap1.get(4)<<endl;
     cout << "FPS:" << rate << endl;
-    string filename="/home/yons/projects/stereocamera/res/result_44.png";
+    string filename="/home/yons/projects/stereocamera/res/result_4.png";
     
-    //threads[0]=thread(get_depth,cap,filenames,&frameLl,&frameLr,0,false,dpl);
-    //threads[1]=thread(get_depth,cap1,filenames2,&frameRl,&frameRr,4,false,dpr);
-    //threads[2]=thread(adjustimg,&frameLl,&frameRl,&frameadjust,&framestitch,dpl,dpr);
-    //threads[3]=thread(image_stitch,&frameadjust,&framestitch,&frameLr,&frameRr);
-    threads[0]=thread(rectangle_via_wraping,filename);
-    for(int i=0;i<1;i++) 
+    threads[0]=thread(get_depth,cap,filenames,&frameLl,&frameLr,0,false,dpl);
+    threads[1]=thread(get_depth,cap1,filenames2,&frameRl,&frameRr,4,false,dpr);
+    threads[2]=thread(adjustimg,&frameLl,&frameRl,&frameadjust,&framestitch,dpl,dpr);
+    threads[3]=thread(image_stitch,&frameadjust,&framestitch,&frameLr,&frameRr);
+    //threads[0]=thread(rectangle_via_wraping,filename);
+    for(int i=0;i<4;i++) 
     { 
         cout<<"starting....."<<endl;
         threads[i].join();

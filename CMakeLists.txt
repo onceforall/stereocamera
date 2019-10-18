@@ -19,7 +19,7 @@ include_directories(${OpenCV_INCLUDE_DIRS})
 include_directories(${PROJECT_SOURCE_DIR}/include)
 
 
-add_executable(stereo_camera src/get_depth.cpp src/main.cpp src/feature_extract.cpp src/adjustimg.cpp src/image_stitch.cpp src/calibration.cpp)
+add_executable(stereo_camera src/get_depth.cpp src/main.cpp src/feature_extract.cpp src/adjustimg.cpp src/image_stitch.cpp src/calibration.cpp )
 
 link_directories(${OpenCV_LIBRARY_DIRS})
 

@@ -29,7 +29,7 @@ int mask_fg(Mat& rgbImg,int thrs,Mat &mask)
 	int cols = rgbImg.cols;
 	for (int i=0;i<rows;i++){
 		for (int j=0;j<cols;j++){
-			if (grayImg.at<uchar>(i,j)<thrs-3)
+			if (grayImg.at<uchar>(i,j)==0)
 				mask.at<uchar>(i,j)=1;
 			else
 				mask.at<uchar>(i,j)=0;
@@ -62,7 +62,7 @@ int mask_fg(Mat& rgbImg,int thrs,Mat &mask)
 }
 int rectangle_via_wraping(string filename)
 {
-    int ths=5;
+    int ths=253;
     Mat img = imread(filename,1);
     if(img.empty())
        return -1;
